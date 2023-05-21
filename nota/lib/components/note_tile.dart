@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nota/cubits/notes_data_cubit/cubit.dart';
 import 'package:nota/screens/note_screen.dart';
 import '../models/note_model.dart';
 
 class NoteTile extends StatelessWidget {
   final NoteModel note;
-  const NoteTile({super.key, required this.note});
+  final int index;
+  const NoteTile({super.key, required this.note, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class NoteTile extends StatelessWidget {
         ),
         trailing: TextButton(
           onPressed: () {
-            print('Delete button clicked on ${note.title}');
+            NotesDataCubit().get(context).deleteNote(index);
           },
           child: const Icon(Icons.delete),
         ),
