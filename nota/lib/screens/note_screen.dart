@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/note_scaffold.dart';
 import '../models/note_model.dart';
 
 class NoteScreen extends StatelessWidget {
@@ -11,13 +12,16 @@ class NoteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(note.title),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          IconButton(
+            onPressed: () => print('edit clicked on note ${note.title}'),
+            icon: const Icon(Icons.edit),
+          )
+        ],
       ),
       backgroundColor: Colors.grey,
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), color: Colors.white),
+      body: NoteScaffold(
         child: DraggableScrollableSheet(
           initialChildSize: 1,
           builder: (context, scrollController) =>
