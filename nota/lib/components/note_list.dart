@@ -8,7 +8,7 @@ class NotesList extends StatelessWidget {
   const NotesList({super.key});
   @override
   Widget build(BuildContext context) {
-    final cubit = NotesDataCubit().get(context);
+    final cubit = NotesDataCubit.get(context);
     return BlocConsumer<NotesDataCubit, NotesDataState>(
       listener: (context, state) {
         // TODO: implement listener

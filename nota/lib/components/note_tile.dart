@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/cubits/notes_data_cubit/cubit.dart';
 import 'package:nota/screens/note_screen.dart';
 import '../models/note_model.dart';
@@ -27,7 +28,7 @@ class NoteTile extends StatelessWidget {
         ),
         trailing: TextButton(
           onPressed: () {
-            NotesDataCubit().get(context).deleteNote(index);
+            NotesDataCubit.get(context).deleteNote(index);
           },
           child: const Icon(Icons.delete),
         ),
@@ -37,7 +38,9 @@ class NoteTile extends StatelessWidget {
         ),
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NoteScreen(note: note)),
+          MaterialPageRoute(
+            builder: (context) => NoteScreen(note: note),
+          ),
         ),
       ),
     );
