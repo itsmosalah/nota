@@ -9,10 +9,15 @@ class NotesDataCubit extends Cubit<NotesDataState> {
 
   final notesList = NoteModel.createDummyList();
 
-  get(BuildContext context) => BlocProvider.of<NotesDataCubit>(context);
+  static get(BuildContext context) => BlocProvider.of<NotesDataCubit>(context);
 
   void deleteNote(int index) {
     notesList.removeAt(index);
     emit(NotesDataDeletionSuccess());
+  }
+
+  void createNote({required NoteModel note}) {
+    notesList.add(note);
+    emit(NotesDataSavingSuccess());
   }
 }
