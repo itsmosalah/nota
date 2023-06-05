@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nota/cubits/notes_data_cubit/cubit.dart';
-import 'package:nota/screens/note_screen.dart';
 import '../models/note_model.dart';
+import '../screens/edit_note_screen.dart';
 
 class NoteTile extends StatelessWidget {
   final NoteModel note;
@@ -31,14 +31,10 @@ class NoteTile extends StatelessWidget {
           },
           child: const Icon(Icons.delete),
         ),
-        subtitle: Text(
-          note.content,
-          overflow: TextOverflow.ellipsis,
-        ),
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NoteScreen(note: note),
+            builder: (context) => EditNoteScreen(note: note),
           ),
         ),
       ),
