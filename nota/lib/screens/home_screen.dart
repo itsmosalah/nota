@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:nota/components/note_list.dart';
 import 'package:nota/screens/create_note_screen.dart';
 
+import '../cubits/notes_data_cubit/cubit.dart';
+import 'edit_note_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = NotesDataCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nota'),
@@ -17,7 +21,8 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CreateNoteScreen(),
+                  builder: (context) =>
+                      EditNoteScreen(note: cubit.createNewNote()),
                 ),
               )
             },

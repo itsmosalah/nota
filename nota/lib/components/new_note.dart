@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../cubits/notes_data_cubit/cubit.dart';
 import '../modals/save_note_modal/save_note_modal.dart';
-import '../models/note_model.dart';
 
 class NewNoteUI {
   final BuildContext context;
@@ -43,10 +42,8 @@ class NewNoteUI {
   handleSaveNewNote({required String name}) {
     Navigator.pop(context);
     NotesDataCubit.get(context).createNote(
-      note: NoteModel(
-        title: name,
-        content: textController.text,
-      ),
+      title: name,
+      content: textController.text,
     );
   }
 }
