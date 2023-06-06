@@ -1,15 +1,24 @@
 import 'package:nota/constants/lorem.dart';
+import 'model.dart';
 
-class NoteModel {
+class NoteModel extends Model {
+  static const String dbTableName = 'notes';
+
   int id;
   String title;
   String content;
   NoteModel({required this.id, required this.title, required this.content});
 
-  static List<NoteModel> createDummyList() {
-    return <NoteModel>[
-      for (int i = 0; i < 12; i++)
-        NoteModel(id: i, title: 'title $i', content: '($i) $lorem')
-    ];
-  }
+
+  NoteModel.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        title = json['title'],
+        content = json['content'];
+
+  @override
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "content": content,
+      };
 }

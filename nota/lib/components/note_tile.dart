@@ -5,8 +5,7 @@ import '../screens/edit_note_screen.dart';
 
 class NoteTile extends StatelessWidget {
   final NoteModel note;
-  final int index;
-  const NoteTile({super.key, required this.note, required this.index});
+  const NoteTile({super.key, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class NoteTile extends StatelessWidget {
         ),
         trailing: TextButton(
           onPressed: () {
-            NotesDataCubit.get(context).deleteNote(index);
+            NotesDataCubit.get(context).deleteNote(note);
           },
           child: const Icon(Icons.delete),
         ),
