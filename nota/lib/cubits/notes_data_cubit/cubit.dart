@@ -46,8 +46,7 @@ class NotesDataCubit extends Cubit<NotesDataState> {
   }
 
   NoteModel createNote({required String title, required String content}) {
-    final newNote =
-        NoteModel(id: -1, title: title, content: content);
+    final newNote = NoteModel(id: -1, title: title, content: content);
 
     _db.insertNote(note: newNote).then((createdNoteID) {
       newNote.id = createdNoteID;
@@ -64,10 +63,11 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     final targetNote = _notesList.where((element) => element.id == id).first;
     targetNote.title = title ?? targetNote.title;
     targetNote.content = content ?? targetNote.content;
-    
-    _db.updateNote(note: targetNote).then((_) {
-      emit(NotesDataUpdateSuccess());
-    }).catchError((error) {
+
+    _db
+        .updateNote(note: targetNote)
+        .then((_) => emit(NotesDataUpdateSuccess()))
+        .catchError((error) {
       print(error);
       emit(NotesDataUpdateFailure());
     });
