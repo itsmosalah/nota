@@ -47,10 +47,12 @@ class SQFLiteDB {
 
   Future<int> insertNote({required NoteModel note}) async {
     final db = await getDatabase();
+    final noteJson = note.toJson();
+    noteJson.remove('id'); // to avoid replacing old note with conflicting id
     return await db.insert(
       NoteModel.dbTableName,
-      note.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      noteJson,
+      // conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 

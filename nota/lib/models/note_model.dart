@@ -1,4 +1,3 @@
-import 'package:nota/constants/lorem.dart';
 import 'model.dart';
 
 class NoteModel extends Model {

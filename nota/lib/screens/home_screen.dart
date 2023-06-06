@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nota/components/note_list.dart';
-import 'package:nota/screens/create_note_screen.dart';
-
 import '../cubits/notes_data_cubit/cubit.dart';
 import 'edit_note_screen.dart';
 
