@@ -21,7 +21,7 @@ class NotesList extends StatelessWidget {
               controller: scrollController,
               itemCount: cubit.notesList.length,
               itemBuilder: (BuildContext context, int index) =>
-                  NoteTile(note: cubit.notesList[index], index: index),
+                  NoteTile(note: cubit.notesList[index]),
             ),
           ),
         );
