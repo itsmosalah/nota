@@ -2,33 +2,30 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/cubits/notes_data_cubit/states.dart';
-import 'package:nota/services/local/sqflite/sqflite_db.dart';
 import '../../models/note_model.dart';
 
 class NotesDataCubit extends Cubit<NotesDataState> {
   List<NoteModel> _notesList = [];
-  final _db = SQFLiteDB();
   NotesDataCubit() : super(NotesDataIsLoading()) {
-    loadNotesFromDB();
+    _loadNotesList();
   }
 
-  List<NoteModel> get notesList {
-    _db.getAllNotes().then((value) {
+  List<NoteModel> get notesList => _notesList;
+
+  void _loadNotesList() {
+    NoteModel.listAll.then((value) {
       _notesList = value;
       emit(NotesDataLoadingSuccess());
     }).catchError((error) {
       print(error);
       emit(NotesDataLoadingFailure());
     });
-    return _notesList;
   }
-
-  void loadNotesFromDB() => notesList;
 
   static get(BuildContext context) => BlocProvider.of<NotesDataCubit>(context);
 
-  void deleteNote(NoteModel note) {
-    _db.deleteNote(note.id).then((_) {
+  void deleteNote({required NoteModel note}) {
+    note.delete().then((_) {
       _notesList.removeWhere((e) => e.id == note.id);
       emit(NotesDataDeletionSuccess());
     }).catchError((error) {
@@ -46,11 +43,10 @@ class NotesDataCubit extends Cubit<NotesDataState> {
   }
 
   NoteModel createNote({required String title, required String content}) {
-    final newNote = NoteModel(id: -1, title: title, content: content);
+    final newNote = NoteModel(title: title, content: content);
 
-    _db.insertNote(note: newNote).then((createdNoteID) {
-      newNote.id = createdNoteID;
-      _notesList.add(newNote);
+    newNote.save().then((createdNote) {
+      _notesList.add(createdNote);
       emit(NotesDataSavingSuccess());
     }).catchError((error) {
       print(error);
@@ -59,13 +55,15 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     return newNote;
   }
 
-  void updateNote({required int id, String? title, String? content}) {
-    final targetNote = _notesList.where((element) => element.id == id).first;
-    targetNote.title = title ?? targetNote.title;
-    targetNote.content = content ?? targetNote.content;
+  void updateNote({required NoteModel note, String? title, String? content}) {
+    Map<String, dynamic> data = {
+      "id": note.id,
+      "title": title ?? note.title,
+      "content": content ?? note.content,
+    };
 
-    _db
-        .updateNote(note: targetNote)
+    note
+        .update(data: data)
         .then((_) => emit(NotesDataUpdateSuccess()))
         .catchError((error) {
       print(error);

@@ -22,7 +22,7 @@ class EditNoteScreen extends StatelessWidget {
     void handleChange() {
       final jsonContent = quillController.document.toDelta().toJson();
       cubit.updateNote(
-        id: note.id,
+        note: note,
         content: jsonEncode(jsonContent),
       );
     }
@@ -41,7 +41,7 @@ class EditNoteScreen extends StatelessWidget {
             border: InputBorder.none,
           ),
           onChanged: (value) => cubit.updateNote(
-            id: note.id,
+            note: note,
             title: value,
           ),
         ),
