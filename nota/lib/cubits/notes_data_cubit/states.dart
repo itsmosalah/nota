@@ -17,3 +17,19 @@ class NotesDataUpdateFailure extends NotesDataState {}
 class NotesDataDeletionSuccess extends NotesDataState {}
 
 class NotesDataDeletionFailure extends NotesDataState {}
+
+class LabelDeletionSuccess extends NotesDataState {}
+
+class LabelDeletionFailure extends NotesDataState {}
+
+class LabelAddedSuccess extends NotesDataState {}
+
+class LabelAddedFailure extends NotesDataState {}
+
+class LabelRemovalSuccess extends NotesDataState {}
+
+class LabelRemovalFailure extends NotesDataState {}
+
+class CreateLabelSuccessState extends NotesDataState {}
+
+class CreateLabelFailureState extends NotesDataState {}

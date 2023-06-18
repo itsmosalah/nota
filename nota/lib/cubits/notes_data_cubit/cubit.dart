@@ -2,19 +2,34 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/cubits/notes_data_cubit/states.dart';
+import 'package:nota/models/label_model.dart';
 import '../../models/note_model.dart';
 
 class NotesDataCubit extends Cubit<NotesDataState> {
   List<NoteModel> _notesList = [];
+  List<LabelModel> _labelsList = [];
+
   NotesDataCubit() : super(NotesDataIsLoading()) {
     _loadNotesList();
+    _loadLabelsList();
   }
 
   List<NoteModel> get notesList => _notesList;
+  List<LabelModel> get labelsList => _labelsList;
 
   void _loadNotesList() {
-    NoteModel.listAll.then((value) {
+    NoteModel.listAll().then((value) {
       _notesList = value;
+      emit(NotesDataLoadingSuccess());
+    }).catchError((error) {
+      print(error);
+      emit(NotesDataLoadingFailure());
+    });
+  }
+
+  void _loadLabelsList() {
+    LabelModel.listAll().then((list) {
+      _labelsList = list;
       emit(NotesDataLoadingSuccess());
     }).catchError((error) {
       print(error);
@@ -62,12 +77,55 @@ class NotesDataCubit extends Cubit<NotesDataState> {
       "content": content ?? note.content,
     };
 
-    note
-        .update(data: data)
-        .then((_) => emit(NotesDataUpdateSuccess()))
-        .catchError((error) {
+    note.update(data: data).then((_) {
+      print(_.content);
+      emit(NotesDataUpdateSuccess());
+    }).catchError((error) {
       print(error);
       emit(NotesDataUpdateFailure());
     });
+  }
+
+  void deleteLabel({required LabelModel label}) {
+    label.delete().then((value) {
+      _labelsList.removeWhere((element) => element.id == value.id);
+      emit(LabelDeletionSuccess());
+    }).catchError((error) {
+      print(error);
+      emit(LabelDeletionFailure());
+    });
+  }
+
+  void addLabelToNote({required NoteModel note, required LabelModel label}) {
+    note.addLabel(label: label).then((_) {
+      emit(LabelAddedSuccess());
+    }).catchError((error) {
+      print(error);
+      emit(LabelAddedFailure());
+    });
+  }
+
+  void removeLabelFromNote(
+      {required NoteModel note, required LabelModel label}) {
+    note.removeLabel(label: label).then((_) {
+      note.labels.removeWhere(((element) => element.id == label.id));
+      emit(LabelRemovalSuccess());
+    }).catchError((error) {
+      print(error);
+      emit(LabelRemovalFailure());
+    });
+  }
+
+  LabelModel createLabel({required String title, required Color color}) {
+    final label = LabelModel(title: title, color: color);
+    label.save().then((value) {
+      labelsList.add(value);
+      print(value.id);
+      emit(CreateLabelSuccessState());
+    }).catchError((error) {
+      print(error);
+      emit(CreateLabelFailureState());
+    });
+    return label;
   }
 }

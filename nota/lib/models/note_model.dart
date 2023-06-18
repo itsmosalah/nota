@@ -1,3 +1,6 @@
+import 'package:nota/models/label_model.dart';
+import 'package:nota/models/notes_labels_model.dart';
+
 import 'model.dart';
 
 class NoteModel extends Model {
@@ -5,6 +8,8 @@ class NoteModel extends Model {
   int id = -1;
   String title;
   String content;
+  List<LabelModel> labels = [];
+
   NoteModel({required this.title, required this.content});
 
   NoteModel.fromJson(Map<String, dynamic> json)
@@ -31,13 +36,31 @@ class NoteModel extends Model {
     return this;
   }
 
-  static Future<List<NoteModel>> get listAll async {
+  static Future<List<NoteModel>> listAll() async {
     final db = await Model.database;
-    final maps = await db.query(dbTableName);
+    final notesData = await db.query(dbTableName);
 
-    return List.generate(maps.length, (i) {
-      return NoteModel.fromJson(maps[i]);
-    });
+    final notesList = List.generate(
+      notesData.length,
+      (i) => NoteModel.fromJson(notesData[i]),
+    );
+
+    for (var note in notesList) {
+      await note.loadLabels();
+    }
+
+    return notesList;
+  }
+
+  static getNoteByID({required int id}) async {
+    final db = await Model.database;
+    final noteData = await db.query(
+      dbTableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    final noteObject = NoteModel.fromJson(noteData.first);
+    await noteObject.loadLabels();
   }
 
   @override
@@ -65,5 +88,38 @@ class NoteModel extends Model {
     title = data["title"];
     content = data["content"];
     return this;
+  }
+
+  Future<void> loadLabels() async {
+    final db = await Model.database;
+    final notesLabelsData = await db.query(
+      NotesLabelsModel.dbTableName,
+      where: 'note_id = ?',
+      whereArgs: [id],
+    );
+
+    final labelsIDs = notesLabelsData.map((e) => e["label_id"]).toList();
+
+    final idsPlaceholderString = ('?' * labelsIDs.length).split('').join(',');
+
+    final labelsData = await db.query(
+      LabelModel.dbTableName,
+      where: 'id IN ($idsPlaceholderString)',
+      whereArgs: labelsIDs,
+    );
+
+    labels = List.generate(
+      labelsData.length,
+      (i) => LabelModel.fromJson(labelsData[i]),
+    );
+  }
+
+  Future<void> addLabel({required LabelModel label}) async {
+    await NotesLabelsModel(note: this, label: label).save();
+    labels.add(label);
+  }
+
+  Future<void> removeLabel({required LabelModel label}) async {
+    await NotesLabelsModel.deleteWhere(noteID: id, labelID: label.id);
   }
 }
