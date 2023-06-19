@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nota/components/note/note_container.dart';
 import 'package:nota/cubits/notes_data_cubit/cubit.dart';
 import 'package:nota/cubits/notes_data_cubit/states.dart';
-import 'note_tile.dart';
+
+import 'label/label_filter_container.dart';
 
 class NotesList extends StatelessWidget {
   const NotesList({super.key});
@@ -13,19 +15,38 @@ class NotesList extends StatelessWidget {
       listener: (context, state) {
         // TODO: implement listener
       },
-      builder: (context, state) {
-        return SizedBox.expand(
-          child: DraggableScrollableSheet(
-            initialChildSize: 1,
-            builder: (context, scrollController) => ListView.builder(
-              controller: scrollController,
-              itemCount: cubit.notesList.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  NoteTile(note: cubit.notesList[index]),
+      builder: (context, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: const Text('Labels:'),
+          ),
+          SizedBox(
+            height: 70.0,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: cubit.labelsList.length,
+              itemBuilder: (context, index) => LabelFilterContainer(
+                label: cubit.labelsList[index],
+              ),
             ),
           ),
-        );
-      },
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: const Text('Notes:'),
+          ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: cubit.notesList.length,
+              itemBuilder: (context, index) => NoteContainer(
+                note: cubit.notesList[index],
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
