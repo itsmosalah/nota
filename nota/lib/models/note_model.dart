@@ -122,4 +122,11 @@ class NoteModel extends Model {
   Future<void> removeLabel({required LabelModel label}) async {
     await NotesLabelsModel.deleteWhere(noteID: id, labelID: label.id);
   }
+
+  // comparison
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(other) => other is NoteModel && other.id == id;
 }

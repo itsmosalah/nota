@@ -33,3 +33,7 @@ class LabelRemovalFailure extends NotesDataState {}
 class CreateLabelSuccessState extends NotesDataState {}
 
 class CreateLabelFailureState extends NotesDataState {}
+
+class LabelFilterSuccessState extends NotesDataState {}
+
+class LabelFilterFailureState extends NotesDataState {}

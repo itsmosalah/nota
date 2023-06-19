@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nota/models/model.dart';
+import 'package:nota/models/note_model.dart';
+import 'package:nota/models/notes_labels_model.dart';
 
 class LabelModel extends Model {
   static const dbTableName = 'labels';
@@ -94,4 +96,46 @@ class LabelModel extends Model {
     final data = await db.query(dbTableName, where: 'id = ?', whereArgs: [id]);
     return LabelModel.fromJson(data.first);
   }
+
+  Future<Set<NoteModel>> getLabeledNotes() async =>
+      getLabeledNotesByLabels(labels: [this]);
+
+  static Future<Set<NoteModel>> getLabeledNotesByLabels(
+      {required List<LabelModel> labels}) async {
+    final db = await Model.database;
+
+    final labelIDs = labels.map((e) => e.id).toList();
+
+    var idsPlaceholderString = ('?' * labelIDs.length).split('').join(',');
+
+    final notesIDsRecords = await db.query(
+      columns: ['note_id'],
+      NotesLabelsModel.dbTableName,
+      where: 'label_id IN ($idsPlaceholderString)',
+      whereArgs: labelIDs,
+    );
+
+    final notesIDs = notesIDsRecords.map((e) => e['note_id']).toList();
+
+    idsPlaceholderString = ('?' * notesIDs.length).split('').join(',');
+
+    final notesData = await db.query(
+      NoteModel.dbTableName,
+      where: 'id IN ($idsPlaceholderString)',
+      whereArgs: notesIDs,
+    );
+
+    final notesSet = notesData.map((e) => NoteModel.fromJson(e)).toSet();
+    for (var note in notesSet) {
+      await note.loadLabels();
+    }
+    return notesSet;
+  }
+
+  // comparison
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(other) => other is LabelModel && other.id == id;
 }
