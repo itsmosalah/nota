@@ -10,7 +10,10 @@ class CreateLabelDialogue extends StatelessWidget {
   Widget build(BuildContext context) {
     final NotesDataCubit cubit = NotesDataCubit.get(context);
 
-    final colorController = TextEditingController();
+    final colorController = TextEditingController(
+        text: Colors.purple.value
+            .toRadixString(16)
+            .substring(2)); // Skipping 2 characters for Alpha
 
     return Dialog(
       child: Padding(
@@ -37,18 +40,63 @@ class CreateLabelDialogue extends StatelessWidget {
                   }
                 },
               ),
-              TextButton(
-                onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => Dialog(
-                            child: ColorPickerWidget(
-                          colorController: colorController,
-                        ))),
-                child: const Text('Select color'),
-              ),
+              SelectColorButton(colorController: colorController)
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SelectColorButton extends StatelessWidget {
+  const SelectColorButton({
+    super.key,
+    required this.colorController,
+  });
+
+  final TextEditingController colorController;
+
+  @override
+  Widget build(BuildContext context) {
+    return StatefulBuilder(
+      builder: (context, setState) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () => showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                    shadowColor: Colors.transparent,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          height: 50,
+                          child: Text(
+                            'Select Color',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        ColorPickerWidget(
+                          colorController: colorController,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              setState(() {});
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.check))
+                      ],
+                    ))),
+            child: const Text('Select color'),
+          ),
+          const Text('Current: '),
+          Icon(
+            Icons.circle,
+            color: colorFromHex(colorController.text),
+          ),
+        ],
       ),
     );
   }
