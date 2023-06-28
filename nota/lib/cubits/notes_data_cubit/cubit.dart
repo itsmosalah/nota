@@ -8,23 +8,26 @@ import '../../models/note_model.dart';
 class NotesDataCubit extends Cubit<NotesDataState> {
   List<NoteModel> _notesList = [];
   List<LabelModel> _labelsList = [];
-  List<LabelModel> _filteringLabels = [];
-  Set<NoteModel> _filteredNotes = {};
+  final List<LabelModel> _filteringLabels = [];
+  List<LabelModel> _filteredLabels = [];
+  List<NoteModel> _filteredNotes = [];
 
   NotesDataCubit() : super(NotesDataIsLoading()) {
     _loadNotesList();
     _loadLabelsList();
   }
 
-  List<NoteModel> get notesList {
-    return _filteringLabels.isEmpty ? _notesList : _filteredNotes.toList();
-  }
+  List<NoteModel> get notesList =>
+      isFilteringActive() ? _filteredNotes : _notesList;
 
-  List<LabelModel> get labelsList => _labelsList;
+  List<LabelModel> get labelsList =>
+      isFilteringActive() ? _filteredLabels : _labelsList;
+
+  bool isFilteringActive() => _filteringLabels.isNotEmpty;
 
   void _loadNotesList() {
-    NoteModel.listAll().then((value) {
-      _notesList = value;
+    NoteModel.listAll().then((list) {
+      _notesList = list;
       emit(NotesDataLoadingSuccess());
     }).catchError((error) {
       print(error);
@@ -137,8 +140,14 @@ class NotesDataCubit extends Cubit<NotesDataState> {
   // filtering
   void addLabelFilter(LabelModel label) {
     label.getLabeledNotes().then((notes) {
-      _filteredNotes = notesList.toSet().intersection(notes);
+      _filteredNotes = notesList.toSet().intersection(notes).toList();
       _filteringLabels.add(label);
+      Set<LabelModel> intersectingLabels = {};
+      for (var note in notesList) {
+        intersectingLabels.addAll(note.labels);
+      }
+      _filteredLabels =
+          intersectingLabels.union(_filteringLabels.toSet()).toList();
       emit(LabelFilterSuccessState());
     }).catchError((error) {
       emit(LabelFilterFailureState());
@@ -149,7 +158,7 @@ class NotesDataCubit extends Cubit<NotesDataState> {
   void removeLabelFilter(LabelModel removedLabel) {
     _filteringLabels.remove(removedLabel);
     LabelModel.getLabeledNotesByLabels(labels: _filteringLabels).then((notes) {
-      _filteredNotes = notes;
+      _filteredNotes = notes.toList();
       emit(LabelFilterSuccessState());
     }).catchError((error) {
       print(error);
