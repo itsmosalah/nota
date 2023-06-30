@@ -13,26 +13,28 @@ class NoteOptionsDialogue extends StatelessWidget {
       surfaceTintColor: Colors.white,
       child: Container(
         padding: const EdgeInsets.all(20),
-        height: 200,
-        child: Column(children: [
-          TextButton(
-            child: const Text('Add / remove labels'),
-            onPressed: () {
-              showDialog(
-                barrierColor: Colors.transparent,
-                context: context,
-                builder: (context) => NoteLabelsListDialogue(note: note),
-              ).then((_) => Navigator.pop(context));
-            },
-          ),
-          TextButton(
-            child: const Text('Delete'),
-            onPressed: () {
-              NotesDataCubit.get(context).deleteNote(note: note);
-              Navigator.pop(context);
-            },
-          ),
-        ]),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              child: const Text('Add / remove labels'),
+              onPressed: () {
+                showDialog(
+                  barrierColor: Colors.transparent,
+                  context: context,
+                  builder: (context) => NoteLabelsListDialogue(note: note),
+                ).then((_) => Navigator.pop(context));
+              },
+            ),
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                NotesDataCubit.get(context).deleteNote(note: note);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

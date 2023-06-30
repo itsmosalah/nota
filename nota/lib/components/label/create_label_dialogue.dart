@@ -23,11 +23,13 @@ class CreateLabelDialogue extends StatelessWidget {
             children: [
               NameForm(
                 submitCallback: (String text) {
-                  cubit.createLabel(
-                    title: text,
-                    color: colorFromHex(colorController.text)!,
-                  );
-                  Navigator.pop(context);
+                  if (text.isNotEmpty) {
+                    cubit.createLabel(
+                      title: text,
+                      color: colorFromHex(colorController.text)!,
+                    );
+                    Navigator.pop(context);
+                  }
                 },
                 cancelCallback: () => Navigator.pop(context),
                 title: 'Create a new label',
@@ -36,7 +38,7 @@ class CreateLabelDialogue extends StatelessWidget {
                 cancelActionText: 'Cancel',
                 getErrorText: (String text) {
                   if (text.isEmpty) {
-                    return "label title cannot be empty";
+                    return "Label title cannot be empty.";
                   }
                 },
               ),

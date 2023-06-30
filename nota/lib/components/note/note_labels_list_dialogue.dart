@@ -19,18 +19,37 @@ class NoteLabelsListDialogue extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    '${note.title}: Labels',
+                    style: const TextStyle(
+                        color: Colors.deepPurple,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
                 NotesLabelsList(note: note),
-                TextButton(
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Create New Label',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Cancel'),
                     ),
-                  ),
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => const CreateLabelDialogue(),
-                  ),
+                    TextButton(
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Create New Label',
+                        ),
+                      ),
+                      onPressed: () => showDialog(
+                        context: context,
+                        builder: (context) => const CreateLabelDialogue(),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
