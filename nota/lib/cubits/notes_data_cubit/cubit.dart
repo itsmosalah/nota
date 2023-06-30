@@ -95,8 +95,13 @@ class NotesDataCubit extends Cubit<NotesDataState> {
   }
 
   void deleteLabel({required LabelModel label}) {
-    label.delete().then((value) {
-      _labelsList.removeWhere((element) => element.id == value.id);
+    label.delete().then((deletedLabel) {
+      _labelsList.removeWhere((label) => label.id == deletedLabel.id);
+
+      removeDeletedLabelFromNote(note) =>
+          note.labels.removeWhere((aLabel) => aLabel.id == deletedLabel.id);
+
+      _notesList.forEach(removeDeletedLabelFromNote);
       emit(LabelDeletionSuccess());
     }).catchError((error) {
       print(error);
@@ -139,15 +144,15 @@ class NotesDataCubit extends Cubit<NotesDataState> {
 
   // filtering
   void addLabelFilter(LabelModel label) {
-    label.getLabeledNotes().then((notes) {
-      _filteredNotes = notesList.toSet().intersection(notes).toList();
+    label.getLabeledNotes().then((labeledNotes) {
+      _filteredNotes = notesList.toSet().intersection(labeledNotes).toList();
       _filteringLabels.add(label);
-      Set<LabelModel> intersectingLabels = {};
-      for (var note in notesList) {
-        intersectingLabels.addAll(note.labels);
+      Set<LabelModel> labelsOfFilteredNotes = {};
+      for (var note in _filteredNotes) {
+        labelsOfFilteredNotes.addAll(note.labels);
       }
       _filteredLabels =
-          intersectingLabels.union(_filteringLabels.toSet()).toList();
+          labelsOfFilteredNotes.union(_filteringLabels.toSet()).toList();
       emit(LabelFilterSuccessState());
     }).catchError((error) {
       emit(LabelFilterFailureState());
