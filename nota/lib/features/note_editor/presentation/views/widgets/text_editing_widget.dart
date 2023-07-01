@@ -10,7 +10,6 @@ class TextEditingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilding note canvas');
     final quillController = QuillController(
       document: Document.fromJson(jsonDecode(cubit.noteContent)),
       selection: const TextSelection.collapsed(offset: 0),

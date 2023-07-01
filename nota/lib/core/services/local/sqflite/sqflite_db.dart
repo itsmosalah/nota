@@ -1,4 +1,4 @@
-import 'package:nota/services/local/sqflite/sql_commands.dart';
+import 'package:nota/core/services/local/sqflite/sql_commands.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

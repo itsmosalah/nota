@@ -1,6 +1,6 @@
-import '../../../core/models/label_model.dart';
-import '../../../core/models/note_model.dart';
-import '../../../core/models/notes_labels_model.dart';
+import '../../../models/label_model.dart';
+import '../../../models/note_model.dart';
+import '../../../models/notes_labels_model.dart';
 
 class SQLCommands {
   static const String createNotesTable = """
