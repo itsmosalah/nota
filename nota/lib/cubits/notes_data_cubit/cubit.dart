@@ -17,6 +17,9 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     _loadLabelsList();
   }
 
+  static NotesDataCubit get(BuildContext context) =>
+      BlocProvider.of<NotesDataCubit>(context);
+
   List<NoteModel> get notesList =>
       isFilteringActive() ? _filteredNotes : _notesList;
 
@@ -45,8 +48,6 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     });
   }
 
-  static get(BuildContext context) => BlocProvider.of<NotesDataCubit>(context);
-
   void deleteNote({required NoteModel note}) {
     note.delete().then((_) {
       _notesList.removeWhere((e) => e.id == note.id);
@@ -57,16 +58,18 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     });
   }
 
-  NoteModel createNewNote() {
-    return createNote(
-        title: "New Note",
-        content: jsonEncode([
-          {"insert": "\n"}
-        ]));
+  void updateNoteTitle({required NoteModel note, required String newTitle}) {
+    note.update(data: {"title": newTitle}).then((_) {
+      emit(NotesDataUpdateSuccess());
+    }).catchError((error) {
+      emit(NotesDataUpdateFailure());
+    });
   }
 
-  NoteModel createNote({required String title, required String content}) {
-    final newNote = NoteModel(title: title, content: content);
+  NoteModel createNewNote() => createNote(title: "New Note");
+
+  NoteModel createNote({required String title}) {
+    final newNote = NoteModel(title: title);
 
     newNote.save().then((createdNote) {
       _notesList.add(createdNote);
@@ -76,22 +79,6 @@ class NotesDataCubit extends Cubit<NotesDataState> {
       emit(NotesDataSavingFailure());
     });
     return newNote;
-  }
-
-  void updateNote({required NoteModel note, String? title, String? content}) {
-    Map<String, dynamic> data = {
-      "id": note.id,
-      "title": title ?? note.title,
-      "content": content ?? note.content,
-    };
-
-    note.update(data: data).then((_) {
-      print(_.content);
-      emit(NotesDataUpdateSuccess());
-    }).catchError((error) {
-      print(error);
-      emit(NotesDataUpdateFailure());
-    });
   }
 
   void deleteLabel({required LabelModel label}) {
