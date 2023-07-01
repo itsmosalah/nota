@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nota/cubits/notes_data_cubit/cubit.dart';
-import 'package:nota/models/label_model.dart';
+import 'package:nota/features/notes/view_model/cubit.dart';
+import 'package:nota/core/models/label_model.dart';
 
 class LabelFilterContainer extends StatelessWidget {
   const LabelFilterContainer({super.key, required this.label});

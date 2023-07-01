@@ -1,5 +1,5 @@
-import 'package:nota/models/label_model.dart';
-import 'package:nota/models/notes_labels_model.dart';
+import 'package:nota/core/models/label_model.dart';
+import 'package:nota/core/models/notes_labels_model.dart';
 
 import 'model.dart';
 

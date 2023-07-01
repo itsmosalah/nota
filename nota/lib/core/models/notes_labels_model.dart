@@ -1,4 +1,4 @@
-import 'package:nota/models/model.dart';
+import 'package:nota/core/models/model.dart';
 
 import 'label_model.dart';
 import 'note_model.dart';

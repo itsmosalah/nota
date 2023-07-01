@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nota/components/label/create_label_dialogue.dart';
-import 'package:nota/cubits/notes_data_cubit/cubit.dart';
-import 'package:nota/cubits/notes_data_cubit/states.dart';
-import '../../models/note_model.dart';
+import 'package:nota/features/labels/views/widgets/create_label_dialogue.dart';
+import 'package:nota/features/notes/view_model/cubit.dart';
+import 'package:nota/features/notes/view_model/states.dart';
+import '../../../../core/models/note_model.dart';
 import 'notes_labels_checklist.dart';
 
 class NoteLabelsListDialogue extends StatelessWidget {

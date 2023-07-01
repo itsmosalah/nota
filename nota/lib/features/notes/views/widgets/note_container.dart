@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nota/components/note/note_options_dialogue.dart';
-import '../../models/note_model.dart';
-import '../../screens/edit_note_screen.dart';
-import '../label/labels_icons_stack.dart';
+import 'package:nota/features/notes/views/widgets/note_options_dialogue.dart';
+import '../../../../core/models/note_model.dart';
+import '../../../note_editor/presentation/views/edit_note_screen.dart';
+import '../../../labels/views/widgets/labels_icons_stack.dart';
 
 class NoteContainer extends StatelessWidget {
   final NoteModel note;

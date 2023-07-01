@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import '../services/local/sqflite/sqflite_db.dart';
+import '../../services/local/sqflite/sqflite_db.dart';
 
 abstract class Model {
   static final _db = LocalDatabase();

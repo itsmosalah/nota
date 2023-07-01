@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../cubits/notes_data_cubit/cubit.dart';
-import '../../cubits/notes_data_cubit/states.dart';
-import '../../models/note_model.dart';
-import '../label/label_container.dart';
+import '../../view_model/cubit.dart';
+import '../../view_model/states.dart';
+import '../../../../core/models/note_model.dart';
+import '../../../labels/views/widgets/label_container.dart';
 
 class NotesLabelsList extends StatelessWidget {
   const NotesLabelsList({

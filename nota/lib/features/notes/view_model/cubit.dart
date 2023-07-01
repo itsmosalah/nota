@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nota/cubits/notes_data_cubit/states.dart';
-import 'package:nota/models/label_model.dart';
-import '../../models/note_model.dart';
+import 'package:nota/features/notes/view_model/states.dart';
+import 'package:nota/core/models/label_model.dart';
+import '../../../core/models/note_model.dart';
 
 class NotesDataCubit extends Cubit<NotesDataState> {
   List<NoteModel> _notesList = [];

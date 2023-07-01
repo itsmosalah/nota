@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nota/components/note_list.dart';
-import '../cubits/notes_data_cubit/cubit.dart';
-import 'edit_note_screen.dart';
+import '../../notes/views/note_list.dart';
+import '../../notes/view_model/cubit.dart';
+import '../../note_editor/presentation/views/edit_note_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +11,10 @@ class HomeScreen extends StatelessWidget {
     final cubit = NotesDataCubit.get(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nota'),
+        title: Text(
+          'Nota',
+          style: Theme.of(context).primaryTextTheme.titleLarge,
+        ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           IconButton(

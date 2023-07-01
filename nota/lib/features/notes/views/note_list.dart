@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nota/components/note/note_container.dart';
-import 'package:nota/cubits/notes_data_cubit/cubit.dart';
-import 'package:nota/cubits/notes_data_cubit/states.dart';
+import 'package:nota/features/notes/views/widgets/note_container.dart';
+import 'package:nota/features/notes/view_model/cubit.dart';
+import 'package:nota/features/notes/view_model/states.dart';
 
-import 'label/label_filter_container.dart';
+import '../../labels/views/widgets/label_filter_container.dart';
 
 class NotesList extends StatelessWidget {
   const NotesList({super.key});

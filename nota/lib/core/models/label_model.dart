@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nota/models/model.dart';
-import 'package:nota/models/note_model.dart';
-import 'package:nota/models/notes_labels_model.dart';
+import 'package:nota/core/models/model.dart';
+import 'package:nota/core/models/note_model.dart';
+import 'package:nota/core/models/notes_labels_model.dart';
 
 class LabelModel extends Model {
   static const dbTableName = 'labels';

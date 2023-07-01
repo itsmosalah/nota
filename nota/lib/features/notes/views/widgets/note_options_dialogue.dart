@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nota/components/note/note_labels_list_dialogue.dart';
-import '../../cubits/notes_data_cubit/cubit.dart';
-import '../../models/note_model.dart';
+import 'package:nota/features/notes/views/widgets/note_labels_list_dialogue.dart';
+import '../../view_model/cubit.dart';
+import '../../../../core/models/note_model.dart';
 
 class NoteOptionsDialogue extends StatelessWidget {
   final NoteModel note;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:nota/cubits/notes_data_cubit/cubit.dart';
-import 'package:nota/modals/save_note_modal/name_form.dart';
+import 'package:nota/features/notes/view_model/cubit.dart';
+import 'package:nota/core/widgets/name_form.dart';
 import 'color_picker_widget.dart';
 
 class CreateLabelDialogue extends StatelessWidget {

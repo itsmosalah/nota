@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/features/note_editor/presentation/view_model/states.dart';
-import '../../../../models/note_model.dart';
+import '../../../../core/models/note_model.dart';
 
 class TextEditingCubit extends Cubit<TextEditingState> {
   late NoteModel note;

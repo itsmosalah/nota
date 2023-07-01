@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/note_model.dart';
+import '../../../../core/models/note_model.dart';
 
 class LabelsIconStack extends StatelessWidget {
   const LabelsIconStack({
