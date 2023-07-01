@@ -7,21 +7,35 @@ class NoteModel extends Model {
   static const dbTableName = 'notes';
   int id = -1;
   String title;
-  String content;
   List<LabelModel> labels = [];
 
-  NoteModel({required this.title, required this.content});
+  NoteModel({required this.title});
 
   NoteModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        title = json['title'],
-        content = json['content'];
+        title = json['title'] {
+    setContent(json['content']);
+  }
+
+  Future<String> getContent() async {
+    final db = await Model.database;
+    final notesData = await db.query(
+      dbTableName,
+      where: 'id = ?',
+      whereArgs: [id],
+      columns: ['content'],
+    );
+
+    return notesData.first["content"] as String;
+  }
+
+  void setContent(String content) => update(data: {"content": content});
 
   @override
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "content": content,
+        "content": "",
       };
 
   @override
@@ -79,6 +93,11 @@ class NoteModel extends Model {
   @override
   Future<NoteModel> update({required Map<String, dynamic> data}) async {
     final db = await Model.database;
+    data = {
+      "id": id,
+      "title": data["title"] ?? title,
+      "content": data["content"] ?? await getContent()
+    };
     await db.update(
       dbTableName,
       data,
@@ -86,7 +105,6 @@ class NoteModel extends Model {
       whereArgs: [id],
     );
     title = data["title"];
-    content = data["content"];
     return this;
   }
 
