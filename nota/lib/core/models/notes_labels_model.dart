@@ -12,17 +12,8 @@ class NotesLabelsModel extends Model {
   NotesLabelsModel({required this.note, required this.label}) : id = -1;
 
   @override
-  Future<NotesLabelsModel> save() async {
-    final db = await Model.database;
-    final noteJson = toJson();
-    noteJson.remove('id'); // to avoid replacing old note with conflicting id
-    await db.insert(
-      dbTableName,
-      noteJson,
-      // conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-    return this;
-  }
+  Future<void> save() async =>
+      await Model.database.insert(dbTableName, data: toJson());
 
   @override
   Map<String, dynamic> toJson() => {
@@ -32,27 +23,13 @@ class NotesLabelsModel extends Model {
       };
 
   @override
-  Future<Model> delete() async {
-    final db = await Model.database;
-
-    db.delete(
-      dbTableName,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    return this;
-  }
+  Future<void> delete() async =>
+      await Model.database.deleteByIDs(dbTableName, idsList: [id]);
 
   static Future<void> deleteWhere(
-      {required int noteID, required int labelID}) async {
-    final db = await Model.database;
-
-    db.delete(
-      dbTableName,
-      where: 'note_id = ? AND label_id = ?',
-      whereArgs: [noteID, labelID],
-    );
-  }
+          {required int noteID, required int labelID}) async =>
+      await Model.database.deleteWhereAND(dbTableName,
+          whereColumns: ['note_id', 'label_id'], whereArgs: [noteID, labelID]);
 
   @override
   Future<Model> update({required Map<String, dynamic> data}) {

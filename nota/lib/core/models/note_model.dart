@@ -1,60 +1,37 @@
 import 'package:nota/core/models/label_model.dart';
 import 'package:nota/core/models/notes_labels_model.dart';
-
 import 'model.dart';
 
 class NoteModel extends Model {
   static const dbTableName = 'notes';
   int id = -1;
   String title;
+  String content;
   List<LabelModel> labels = [];
 
-  NoteModel({required this.title});
+  NoteModel({required this.title, required this.content});
 
   NoteModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        title = json['title'] {
-    setContent(json['content']);
-  }
-
-  Future<String> getContent() async {
-    final db = await Model.database;
-    final notesData = await db.query(
-      dbTableName,
-      where: 'id = ?',
-      whereArgs: [id],
-      columns: ['content'],
-    );
-
-    return notesData.first["content"] as String;
-  }
-
-  void setContent(String content) => update(data: {"content": content});
+        title = json['title'],
+        content = json['content'];
 
   @override
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "content": "",
+        "content": content,
       };
 
   @override
   Future<NoteModel> delete() async {
-    final db = await Model.database;
-
-    db.delete(
-      dbTableName,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    await Model.database.deleteByIDs(dbTableName, idsList: [id]);
     return this;
   }
 
   static Future<List<NoteModel>> listAll() async {
-    final db = await Model.database;
-    final notesData = await db.query(dbTableName);
-
-    final notesList = List.generate(
+    var notesData = await Model.database.listAll(dbTableName);
+    var notesList = List.generate(
       notesData.length,
       (i) => NoteModel.fromJson(notesData[i]),
     );
@@ -66,65 +43,29 @@ class NoteModel extends Model {
     return notesList;
   }
 
-  static getNoteByID({required int id}) async {
-    final db = await Model.database;
-    final noteData = await db.query(
-      dbTableName,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    final noteObject = NoteModel.fromJson(noteData.first);
-    await noteObject.loadLabels();
-  }
-
   @override
   Future<NoteModel> save() async {
-    final db = await Model.database;
-    final noteJson = toJson();
-    noteJson.remove('id'); // to avoid replacing old note with conflicting id
-    await db.insert(
-      dbTableName,
-      noteJson,
-      // conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    id = await Model.database.insert(dbTableName, data: toJson());
     return this;
   }
 
   @override
-  Future<NoteModel> update({required Map<String, dynamic> data}) async {
-    final db = await Model.database;
-    data = {
-      "id": id,
-      "title": data["title"] ?? title,
-      "content": data["content"] ?? await getContent()
-    };
-    await db.update(
-      dbTableName,
-      data,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    title = data["title"];
-    return this;
+  Future<void> update({required Map<String, dynamic> data}) async {
+    await Model.database.update(dbTableName, object: this, data: data);
+    title = data["title"] ?? title;
+    content = data["content"] ?? content;
   }
 
   Future<void> loadLabels() async {
-    final db = await Model.database;
-    final notesLabelsData = await db.query(
+    var notesLabelsData = await Model.database.getWhere(
       NotesLabelsModel.dbTableName,
-      where: 'note_id = ?',
+      whereColumn: 'note_id',
       whereArgs: [id],
     );
+    var labelsIDs = notesLabelsData.map((e) => e["label_id"] as int).toList();
 
-    final labelsIDs = notesLabelsData.map((e) => e["label_id"]).toList();
-
-    final idsPlaceholderString = ('?' * labelsIDs.length).split('').join(',');
-
-    final labelsData = await db.query(
-      LabelModel.dbTableName,
-      where: 'id IN ($idsPlaceholderString)',
-      whereArgs: labelsIDs,
-    );
+    var labelsData = await Model.database
+        .getByIDs(LabelModel.dbTableName, idsList: labelsIDs);
 
     labels = List.generate(
       labelsData.length,
