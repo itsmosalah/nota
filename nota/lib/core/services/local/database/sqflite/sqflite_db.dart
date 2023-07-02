@@ -67,7 +67,8 @@ class SQFliteDB extends LocalDatabase {
       {required object, required Map<String, dynamic> data}) async {
     data.remove('id');
     final db = await database;
-    return await db.update(table, data, where: 'id = ?', whereArgs: [object.id]);
+    return await db
+        .update(table, data, where: 'id = ?', whereArgs: [object.id]);
   }
 
   @override
@@ -76,13 +77,15 @@ class SQFliteDB extends LocalDatabase {
       required List<Object?> whereArgs,
       List<String>? columns}) async {
     final db = await database;
-    return await db.query(table,
-        where:
-            '$whereColumn ${whereArgs.length > 1 ? 'IN (${commaSeparatedQuestionMarks(whereArgs.length)})' : '= ?'} ',
-        whereArgs: whereArgs,
-        columns: columns);
+    return await db.query(
+      table,
+      where:
+          '$whereColumn ${whereArgs.length == 1 ? '= ${whereArgs.first}' : 'IN (${whereArgs.join(',')})'}',
+      columns: columns,
+    );
   }
 
+  @override
   Future<int> deleteWhereAND(String table,
       {required List<String> whereColumns,
       required List<dynamic> whereArgs}) async {
@@ -93,10 +96,9 @@ class SQFliteDB extends LocalDatabase {
     var whereList = List<String>.generate(
         whereColumns.length,
         (i) =>
-            '${whereColumns[i]} ${whereArgs[i] is Iterable ? 'IN (${commaSeparatedQuestionMarks(whereArgs.length)})' : '= ${whereArgs[i]}'}');
+            '${whereColumns[i]} ${whereArgs[i] is Iterable ? 'IN (${whereArgs.join(',')})' : '= ${whereArgs[i]}'}');
 
     var db = await database;
-    return await db.delete(table,
-        where: whereList.join(' AND '), whereArgs: whereArgs);
+    return await db.delete(table, where: whereList.join(' AND '));
   }
 }
