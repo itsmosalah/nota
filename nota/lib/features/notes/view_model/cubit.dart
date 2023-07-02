@@ -66,10 +66,14 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     });
   }
 
-  NoteModel createNewNote() => createNote(title: "New Note");
+  NoteModel createNewNote() => createNote(
+      title: "New Note",
+      content: jsonEncode([
+        {"insert": "\n"} // Empty note in Quill's format
+      ]));
 
-  NoteModel createNote({required String title}) {
-    final newNote = NoteModel(title: title);
+  NoteModel createNote({required String title, required String content}) {
+    final newNote = NoteModel(title: title, content: content);
 
     newNote.save().then((createdNote) {
       _notesList.add(createdNote);
@@ -83,10 +87,10 @@ class NotesDataCubit extends Cubit<NotesDataState> {
 
   void deleteLabel({required LabelModel label}) {
     label.delete().then((deletedLabel) {
-      _labelsList.removeWhere((label) => label.id == deletedLabel.id);
+      _labelsList.removeWhere((aLabel) => aLabel.id == label.id);
 
       removeDeletedLabelFromNote(note) =>
-          note.labels.removeWhere((aLabel) => aLabel.id == deletedLabel.id);
+          note.labels.removeWhere((aLabel) => aLabel.id == label.id);
 
       _notesList.forEach(removeDeletedLabelFromNote);
       emit(LabelDeletionSuccess());
@@ -120,7 +124,6 @@ class NotesDataCubit extends Cubit<NotesDataState> {
     final label = LabelModel(title: title, color: color);
     label.save().then((value) {
       labelsList.add(value);
-      print(value.id);
       emit(CreateLabelSuccessState());
     }).catchError((error) {
       print(error);

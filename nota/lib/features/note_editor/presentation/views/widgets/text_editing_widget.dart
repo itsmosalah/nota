@@ -11,7 +11,7 @@ class TextEditingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final quillController = QuillController(
-      document: Document.fromJson(jsonDecode(cubit.noteContent)),
+      document: Document.fromJson(jsonDecode(cubit.note.content)),
       selection: const TextSelection.collapsed(offset: 0),
     );
 

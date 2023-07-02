@@ -4,7 +4,6 @@ import '../../../../core/models/note_model.dart';
 
 class TextEditingCubit extends Cubit<TextEditingState> {
   late NoteModel note;
-  String? _noteContent;
 
   TextEditingCubit() : super(TextEditingInitial());
 
@@ -14,20 +13,6 @@ class TextEditingCubit extends Cubit<TextEditingState> {
 
   void initialize(NoteModel note) {
     this.note = note;
-    loadNoteContent();
-  }
-
-  bool isNoteContentLoaded() => _noteContent != null;
-  String get noteContent => _noteContent!;
-
-  void loadNoteContent() {
-    note.getContent().then((value) {
-      _noteContent = value;
-      emit(NoteContentLoadingSuccess());
-    }).catchError((error) {
-      print(error);
-      emit(NoteContentLoadingSuccess());
-    });
   }
 
   void updateNote({String? title, String? content}) {

@@ -39,13 +39,8 @@ class EditNoteScreen extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: BlocBuilder<TextEditingCubit, TextEditingState>(
-                  builder: (context, state) =>
-                      state is NoteContentLoadingSuccess
-                          ? TextEditingWidget(
-                              cubit: cubit,
-                            )
-                          : const Center(child: CircularProgressIndicator()),
+                child: TextEditingWidget(
+                  cubit: cubit,
                 ),
               ),
             ],
