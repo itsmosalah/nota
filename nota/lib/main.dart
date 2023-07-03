@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
-import 'package:nota/features/note_editor/presentation/view_model/cubit.dart';
 import 'package:nota/features/home/views/home_screen.dart';
 
 void main() {
@@ -18,9 +17,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => NotesDataCubit(),
-        ),
-        BlocProvider(
-          create: (context) => TextEditingCubit(),
         ),
       ],
       child: MaterialApp(
