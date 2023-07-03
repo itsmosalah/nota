@@ -10,9 +10,6 @@ class ColorPickerWidget extends StatefulWidget {
 }
 
 class _ColorPickerWidgetState extends State<ColorPickerWidget> {
-  Color pickerColor = Colors.purple;
-  Color currentColor = Colors.purple;
-
   void changeColor(Color color) {
     setState(() => widget.colorController.text = color.value
         .toRadixString(16)

@@ -31,14 +31,6 @@ class LabelContainer extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                TextButton(
-                  child: const Text('Modify'),
-                  onPressed: () => print('change color label ${label.id}'),
-                ),
-                TextButton(
-                  child: const Text('Test'),
-                  onPressed: () => label.getLabeledNotes(),
-                ),
               ],
             ),
           ),

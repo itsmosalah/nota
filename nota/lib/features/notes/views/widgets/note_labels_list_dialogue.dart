@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nota/features/labels/views/widgets/create_label_dialogue.dart';
+import 'package:nota/features/labels/views/widgets/color_selection/create_label_dialogue.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/features/notes/view_model/states.dart';
 import '../../../../core/models/note_model.dart';
