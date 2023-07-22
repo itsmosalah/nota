@@ -51,7 +51,7 @@ class NoteModel extends Model {
 
   @override
   Future<void> update({required Map<String, dynamic> data}) async {
-    await Model.database.update(dbTableName, object: this, data: data);
+    await Model.database.update(dbTableName, objectJson: toJson(), data: data);
     title = data["title"] ?? title;
     content = data["content"] ?? content;
   }

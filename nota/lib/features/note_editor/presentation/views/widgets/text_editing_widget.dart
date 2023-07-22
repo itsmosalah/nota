@@ -5,15 +5,14 @@ import 'package:nota/core/models/note_model.dart';
 
 class TextEditingWidget extends StatelessWidget {
   final NoteModel note;
-  const TextEditingWidget({super.key, required this.note});
+  const TextEditingWidget(
+      {super.key, required this.note, required this.quillController});
+  final QuillController quillController;
+
+  
 
   @override
   Widget build(BuildContext context) {
-    final quillController = QuillController(
-      document: Document.fromJson(jsonDecode(note.content)),
-      selection: const TextSelection.collapsed(offset: 0),
-    );
-
     void handleChange() {
       final jsonContent = quillController.document.toDelta().toJson();
       note.update(data: {"content": jsonEncode(jsonContent)});

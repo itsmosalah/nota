@@ -14,7 +14,7 @@ class NoteContainer extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(10),
           color: Colors.white,
         ),
         child: InkWell(

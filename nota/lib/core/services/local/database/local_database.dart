@@ -3,7 +3,8 @@ abstract class LocalDatabase {
   Future<void> deleteDatabase();
 
   Future<int> update(String table,
-      {required object, required Map<String, dynamic> data});
+      {required Map<String, dynamic> objectJson,
+      required Map<String, dynamic> data});
 
   Future<int> deleteByIDs(String table, {required List<int> idsList});
 
