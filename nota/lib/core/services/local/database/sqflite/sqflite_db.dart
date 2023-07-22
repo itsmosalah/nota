@@ -63,12 +63,15 @@ class SQFliteDB extends LocalDatabase {
   }
 
   @override
-  Future<int> update(String table,
-      {required object, required Map<String, dynamic> data}) async {
+  Future<int> update(
+    String table, {
+    required Map<String, dynamic> objectJson,
+    required Map<String, dynamic> data,
+  }) async {
     data.remove('id');
     final db = await database;
     return await db
-        .update(table, data, where: 'id = ?', whereArgs: [object.id]);
+        .update(table, data, where: 'id = ?', whereArgs: [objectJson["id"]]);
   }
 
   @override
