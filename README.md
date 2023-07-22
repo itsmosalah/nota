@@ -2,7 +2,8 @@
 A Flutter app used for taking notes and saving them on the phone. 
 **It is currently under development.**
 
-It is intended for saving text notes on the phone while keeping them organized using folders, lables, and so on...
+It is intended for saving text notes on the phone local storage, while keeping them organized using labels for filtering.
+More customization options will be released in the future.
 
 ## Screenshots:
 
@@ -11,10 +12,16 @@ height="570"> <img src="https://github.com/itsmosalah/nota/assets/88220582/beb2e
 height="570"> <img src="https://github.com/itsmosalah/nota/assets/88220582/0dc218e1-0f9e-4082-b877-329addcb4b22"  width="270" 
 height="570">
 
+## Features
+- Create notes with rich text editing features.
+- Create labels for organizing notes with custom colors.
+- Filter notes by selecting the label(s) associated with them.
+
 ## Tools used in this app:
 - Flutter
 - BloC (state management)
 - SQFLite (local database)
 - QuillEditor (rich text editing)
 
-App is still under development. More documentation will be provided soon...
+The current version is still at MVP phase.
+More documentation will be provided soon...
