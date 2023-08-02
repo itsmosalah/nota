@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nota/core/widgets/action_text_button.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/core/models/label_model.dart';
 
@@ -24,8 +25,8 @@ class LabelContainer extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextButton(
-                  child: const Text('Delete'),
+                ActionTextButton(
+                  text: 'Delete',
                   onPressed: () {
                     NotesDataCubit.get(context).deleteLabel(label: label);
                     Navigator.pop(context);

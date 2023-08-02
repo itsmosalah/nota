@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:nota/core/widgets/action_text_button.dart';
 import 'color_picker_widget.dart';
 
 class SelectColorButton extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SelectColorButtonState extends State<SelectColorButton> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextButton(
+        ActionTextButton(
           onPressed: () => showDialog(
             context: context,
             builder: (context) => Dialog(
@@ -48,7 +49,7 @@ class _SelectColorButtonState extends State<SelectColorButton> {
               ),
             ),
           ),
-          child: const Text('Select color'),
+          text: 'Select color',
         ),
         const Text('Current: '),
         Icon(

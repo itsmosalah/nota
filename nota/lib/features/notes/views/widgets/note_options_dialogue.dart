@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nota/core/widgets/action_text_button.dart';
 import 'package:nota/features/notes/views/widgets/note_labels_list_dialogue.dart';
 import '../../view_model/cubit.dart';
 import '../../../../core/models/note_model.dart';
@@ -16,8 +17,8 @@ class NoteOptionsDialogue extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextButton(
-              child: const Text('Add / remove labels'),
+            ActionTextButton(
+              text: 'Add / remove labels',
               onPressed: () {
                 showDialog(
                   barrierColor: Colors.transparent,
@@ -26,8 +27,8 @@ class NoteOptionsDialogue extends StatelessWidget {
                 ).then((_) => Navigator.pop(context));
               },
             ),
-            TextButton(
-              child: const Text('Delete'),
+            ActionTextButton(
+              text: 'Delete',
               onPressed: () {
                 NotesDataCubit.get(context).deleteNote(note: note);
                 Navigator.pop(context);
