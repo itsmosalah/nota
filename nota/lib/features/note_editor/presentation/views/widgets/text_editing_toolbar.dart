@@ -1,7 +1,7 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
-import '../../../../themes/theme_settings.dart';
+import '../../../../themes/presentation/view_model/theme_settings.dart';
 import 'custom_quill_toolbar.dart';
 
 class TextEditingToolbar extends StatelessWidget {

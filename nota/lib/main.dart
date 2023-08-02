@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/features/home/views/home_screen.dart';
-import 'features/themes/theme_provider_widget.dart';
+import 'features/themes/presentation/view_model/theme_provider_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

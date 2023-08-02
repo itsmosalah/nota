@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nota/features/themes/theme_settings.dart';
+import 'package:nota/features/settings/settings_screen.dart';
+import 'package:nota/features/themes/presentation/view_model/theme_settings.dart';
 import '../../notes/views/note_list.dart';
 import '../../notes/view_model/cubit.dart';
 import '../../note_editor/presentation/views/edit_note_screen.dart';
@@ -32,14 +33,29 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.add),
           ),
           IconButton(
-            onPressed: () => ThemeSettings.cycleTheme(context),
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const SettingsScreen())),
             icon: const Icon(Icons.settings),
           ),
         ],
       ),
       backgroundColor:
           ThemeSettings.getThemeData(context).colorScheme.background,
-      body: const NotesList(),
+      body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                ThemeSettings.getThemeData(context).colorScheme.secondary,
+                ThemeSettings.getThemeData(context).colorScheme.background
+              ],
+              stops: const [0.1, 0.8],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: const NotesList()),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:nota/features/note_editor/presentation/views/widgets/text_editin
 import 'package:nota/features/notes/views/widgets/note_scaffold.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/features/note_editor/presentation/views/widgets/text_editing_widget.dart';
-import 'package:nota/features/themes/theme_settings.dart';
+import 'package:nota/features/themes/presentation/view_model/theme_settings.dart';
 import '../../../../core/models/note_model.dart';
 
 class EditNoteScreen extends StatelessWidget {
