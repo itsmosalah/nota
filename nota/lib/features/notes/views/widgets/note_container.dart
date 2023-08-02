@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nota/features/notes/views/widgets/note_options_dialogue.dart';
-import 'package:nota/features/themes/theme_settings.dart';
+import 'package:nota/features/themes/presentation/view_model/theme_settings.dart';
 import '../../../../core/models/note_model.dart';
 import '../../../note_editor/presentation/views/edit_note_screen.dart';
 import '../../../labels/views/widgets/labels_icons_stack.dart';
@@ -13,11 +13,16 @@ class NoteContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      child: Ink(
-        decoration: BoxDecoration(
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: ThemeSettings.getThemeData(context).colorScheme.surface,
-        ),
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 10,
+              color: Colors.grey,
+            )
+          ]),
+      child: Ink(
         child: InkWell(
           splashFactory: NoSplash.splashFactory,
           onLongPress: () async => await showDialog(
