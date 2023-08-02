@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nota/features/notes/views/widgets/note_options_dialogue.dart';
+import 'package:nota/features/themes/theme_settings.dart';
 import '../../../../core/models/note_model.dart';
 import '../../../note_editor/presentation/views/edit_note_screen.dart';
 import '../../../labels/views/widgets/labels_icons_stack.dart';
@@ -15,7 +16,7 @@ class NoteContainer extends StatelessWidget {
       child: Ink(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
+          color: ThemeSettings.getThemeData(context).colorScheme.surface,
         ),
         child: InkWell(
           splashFactory: NoSplash.splashFactory,
@@ -38,6 +39,7 @@ class NoteContainer extends StatelessWidget {
                   child: Text(
                     note.title,
                     overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 LabelsIconStack(note: note)

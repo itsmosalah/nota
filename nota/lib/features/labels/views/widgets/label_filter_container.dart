@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/core/models/label_model.dart';
 
+import '../../../themes/theme_settings.dart';
+
 class LabelFilterContainer extends StatelessWidget {
   const LabelFilterContainer({super.key, required this.label});
 
@@ -28,7 +30,20 @@ class LabelFilterContainer extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Center(child: Text(label.title)),
+            Center(
+                child: Text(
+              label.title,
+              style: TextStyle(fontWeight: FontWeight.bold, shadows: [
+                Shadow(
+                    color: ThemeSettings.getThemeData(context)
+                                .colorScheme
+                                .brightness ==
+                            Brightness.dark
+                        ? Colors.black
+                        : Colors.white,
+                    blurRadius: 10)
+              ]),
+            )),
             isFiltering
                 ? const Icon(
                     Icons.check,
