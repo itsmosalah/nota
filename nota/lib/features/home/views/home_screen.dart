@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nota/core/widgets/screen_container.dart';
 import 'package:nota/features/settings/settings_screen.dart';
 import 'package:nota/features/themes/presentation/view_model/theme_settings.dart';
 import '../../notes/views/note_list.dart';
@@ -40,22 +41,12 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.settings),
           ),
         ],
+        shadowColor: Colors.black,
+        elevation: 10,
       ),
       backgroundColor:
           ThemeSettings.getThemeData(context).colorScheme.background,
-      body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ThemeSettings.getThemeData(context).colorScheme.secondary,
-                ThemeSettings.getThemeData(context).colorScheme.background
-              ],
-              stops: const [0.1, 0.8],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: const NotesList()),
+      body: const ScreenContainer(screen: NotesList()),
     );
   }
 }
