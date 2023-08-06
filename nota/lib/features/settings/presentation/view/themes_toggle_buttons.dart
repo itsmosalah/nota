@@ -14,26 +14,34 @@ class ThemesToggleButtons extends StatelessWidget {
         .map((theme) => theme.id == ThemeSettings.getCurrentThemeID(context))
         .toList();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Select theme: ',
-          style: TextStyle(fontSize: 18),
-        ),
-        StatefulBuilder(
-          builder: (context, setState) => ToggleButtons(
-            direction: Axis.horizontal,
-            isSelected: selectedThemes,
-            children: themeOptions
-                .map((e) => ThemeColorsPreview(themeData: e.data))
-                .toList(),
-            onPressed: (int index) => setState(() {
-              ThemeSettings.setThemeByID(context, themeOptions[index].id);
-              for (var i = 0; i < selectedThemes.length; i++) {
-                selectedThemes[i] = i == index;
-              }
-            }),
+        const Row(children: [
+          Text(
+            'Select theme: ',
+            style: TextStyle(fontSize: 18),
+          )
+        ]),
+        const SizedBox(height: 10),
+        Center(
+          child: StatefulBuilder(
+            builder: (context, setState) => SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: ToggleButtons(
+                direction: Axis.horizontal,
+                isSelected: selectedThemes,
+                children: themeOptions
+                    .map((e) => ThemeColorsPreview(themeData: e.data))
+                    .toList(),
+                onPressed: (int index) => setState(() {
+                  ThemeSettings.setThemeByID(context, themeOptions[index].id);
+                  for (var i = 0; i < selectedThemes.length; i++) {
+                    selectedThemes[i] = i == index;
+                  }
+                }),
+              ),
+            ),
           ),
         ),
       ],
