@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nota/features/labels/label_filter.dart';
 import 'package:nota/features/notes/view_model/states.dart';
 import 'package:nota/core/models/label_model.dart';
 import '../../../core/models/note_model.dart';
@@ -8,25 +9,22 @@ import '../../../core/models/note_model.dart';
 class NotesDataCubit extends Cubit<NotesDataState> {
   List<NoteModel> _notesList = [];
   List<LabelModel> _labelsList = [];
-  final List<LabelModel> _filteringLabels = [];
-  List<LabelModel> _filteredLabels = [];
-  List<NoteModel> _filteredNotes = [];
+  late LabelsFilter _labelsFilter;
 
   NotesDataCubit() : super(NotesDataIsLoading()) {
     _loadNotesList();
     _loadLabelsList();
+    _labelsFilter = LabelsFilter(cubit: this);
   }
 
   static NotesDataCubit get(BuildContext context) =>
       BlocProvider.of<NotesDataCubit>(context);
 
-  List<NoteModel> get notesList =>
-      isFilteringActive() ? _filteredNotes : _notesList;
+  List<NoteModel> get notesList => _notesList;
 
-  List<LabelModel> get labelsList =>
-      isFilteringActive() ? _filteredLabels : _labelsList;
+  List<LabelModel> get labelsList => _labelsList;
 
-  bool isFilteringActive() => _filteringLabels.isNotEmpty;
+  LabelsFilter get labelsFilter => _labelsFilter;
 
   void _loadNotesList() {
     NoteModel.listAll().then((list) {
@@ -133,33 +131,29 @@ class NotesDataCubit extends Cubit<NotesDataState> {
   }
 
   // filtering
+
+  bool isFilteringActive() => _labelsFilter.isFiltering;
+
   void addLabelFilter(LabelModel label) {
-    label.getLabeledNotes().then((labeledNotes) {
-      _filteredNotes = notesList.toSet().intersection(labeledNotes).toList();
-      _filteringLabels.add(label);
-      Set<LabelModel> labelsOfFilteredNotes = {};
-      for (var note in _filteredNotes) {
-        labelsOfFilteredNotes.addAll(note.labels);
-      }
-      _filteredLabels =
-          labelsOfFilteredNotes.union(_filteringLabels.toSet()).toList();
-      emit(LabelFilterSuccessState());
-    }).catchError((error) {
+    _labelsFilter
+        .addLabelFilter(label)
+        .then((_) => emit(LabelFilterSuccessState()))
+        .catchError((error) {
       emit(LabelFilterFailureState());
       print(error);
     });
   }
 
   void removeLabelFilter(LabelModel removedLabel) {
-    _filteringLabels.remove(removedLabel);
-    LabelModel.getLabeledNotesByLabels(labels: _filteringLabels).then((notes) {
-      _filteredNotes = notes.toList();
-      emit(LabelFilterSuccessState());
-    }).catchError((error) {
+    _labelsFilter
+        .removeLabelFilter(removedLabel)
+        .then((_) => emit(LabelFilterSuccessState()))
+        .catchError((error) {
       print(error);
       emit(LabelFilterFailureState());
     });
   }
 
-  bool isLabelFiltered(LabelModel label) => _filteringLabels.contains(label);
+  bool isLabelFiltered(LabelModel label) =>
+      _labelsFilter.isLabelFiltered(label);
 }
