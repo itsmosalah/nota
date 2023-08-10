@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'action_text_button.dart';
+
 // ignore: must_be_immutable
 class NameForm extends StatelessWidget {
   final String title;
@@ -45,13 +47,13 @@ class NameForm extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton(
+            ActionTextButton(
               onPressed: () => cancelCallback(),
-              child: Text(cancelActionText),
+              text: cancelActionText,
             ),
-            TextButton(
+            ActionTextButton(
               onPressed: () => submitCallback(textController.value.text),
-              child: Text(submitActionText),
+              text: submitActionText,
             ),
           ],
         )
