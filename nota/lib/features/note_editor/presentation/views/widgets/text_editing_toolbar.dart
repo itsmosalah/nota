@@ -1,6 +1,7 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
+import '../../../../themes/presentation/view_model/theme_settings.dart';
 import 'custom_quill_toolbar.dart';
 
 class TextEditingToolbar extends StatelessWidget {
@@ -11,7 +12,7 @@ class TextEditingToolbar extends StatelessWidget {
     final scrollController = ScrollController();
     return Container(
       padding: const EdgeInsets.all(10),
-      color: Colors.deepPurple[100],
+      color: ThemeSettings.getThemeData(context).canvasColor,
       child: FadingEdgeScrollView.fromSingleChildScrollView(
         gradientFractionOnStart: 0.2,
         gradientFractionOnEnd: 0.2,

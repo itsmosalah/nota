@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nota/core/models/label_model.dart';
+import 'package:nota/core/models/note_model.dart';
 import 'package:nota/features/notes/views/widgets/note_container.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/features/notes/view_model/states.dart';
@@ -11,9 +13,23 @@ class NotesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = NotesDataCubit.get(context);
+    List<LabelModel> labelsList = [];
+    List<NoteModel> notesList = [];
+
+    void initializeLists() {
+      labelsList = cubit.isFilteringActive()
+          ? cubit.labelsFilter.filteredLabels
+          : cubit.labelsList;
+      notesList = cubit.isFilteringActive()
+          ? cubit.labelsFilter.filteredNotes
+          : cubit.notesList;
+    }
+
+    initializeLists();
+
     return BlocConsumer<NotesDataCubit, NotesDataState>(
       listener: (context, state) {
-        // TODO: implement listener
+        initializeLists();
       },
       builder: (context, state) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,9 +42,9 @@ class NotesList extends StatelessWidget {
             height: 70.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: cubit.labelsList.length,
+              itemCount: labelsList.length,
               itemBuilder: (context, index) => LabelFilterContainer(
-                label: cubit.labelsList[index],
+                label: labelsList[index],
               ),
             ),
           ),
@@ -39,9 +55,9 @@ class NotesList extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: cubit.notesList.length,
+              itemCount: notesList.length,
               itemBuilder: (context, index) => NoteContainer(
-                note: cubit.notesList[index],
+                note: notesList[index],
               ),
             ),
           )

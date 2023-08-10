@@ -5,6 +5,7 @@ import 'package:nota/features/note_editor/presentation/views/widgets/text_editin
 import 'package:nota/features/notes/views/widgets/note_scaffold.dart';
 import 'package:nota/features/notes/view_model/cubit.dart';
 import 'package:nota/features/note_editor/presentation/views/widgets/text_editing_widget.dart';
+import 'package:nota/features/themes/presentation/view_model/theme_settings.dart';
 import '../../../../core/models/note_model.dart';
 
 class EditNoteScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class EditNoteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleEditingController = TextEditingController(text: note.title);
-    
+
     final quillController = QuillController(
       document: Document.fromJson(jsonDecode(note.content)),
       selection: const TextSelection.collapsed(offset: 0),
@@ -29,16 +30,17 @@ class EditNoteScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor:
+              ThemeSettings.getThemeData(context).colorScheme.primary,
           title: TextField(
             controller: titleEditingController,
-            cursorColor: Colors.black,
             decoration: const InputDecoration(
               border: InputBorder.none,
             ),
           ),
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor:
+            ThemeSettings.getThemeData(context).colorScheme.background,
         body: Column(
           children: [
             Expanded(
