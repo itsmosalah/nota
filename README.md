@@ -1,27 +1,215 @@
-# nota_app
-A Flutter app used for taking notes and saving them on the phone. 
-**It is currently under development.**
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-It is intended for saving text notes on the phone local storage, while keeping them organized using labels for filtering.
-More customization options will be released in the future.
 
-## Screenshots:
+<!-- PROJECT LOGO -->
+<br />
+<h1 align="center">Nota</h1>
+<br />
 
-<img src="https://github.com/itsmosalah/nota/assets/88220582/5a50c581-cb4d-4b18-95f1-747a42f69f0e"  width="270" 
-height="570"> <img src="https://github.com/itsmosalah/nota/assets/88220582/beb2eddc-9eaa-4507-93ab-c074382cb262"  width="270" 
-height="570"> <img src="https://github.com/itsmosalah/nota/assets/88220582/0dc218e1-0f9e-4082-b877-329addcb4b22"  width="270" 
-height="570">
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+<!-- [![MIT License][license-shield]][license-url] -->
 
-## Features
-- Create notes with rich text editing features.
-- Create labels for organizing notes with custom colors.
-- Filter notes by selecting the label(s) associated with them.
 
-## Tools used in this app:
-- Flutter
-- BloC (state management)
-- SQFLite (local database)
-- QuillEditor (rich text editing)
 
-The current version is still at MVP phase.
-More documentation will be provided soon...
+
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `itsmosalah`, `nota`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+* [![Flutter][Flutter]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/itsmosalah/nota.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API';
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
+    - [ ] Nested Feature
+
+See the [open issues](https://github.com/itsmosalah/nota/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+
+Project Link: [https://github.com/itsmosalah/nota](https://github.com/itsmosalah/nota)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* []()
+* []()
+* []()
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/itsmosalah/nota.svg?style=for-the-badge
+[contributors-url]: https://github.com/itsmosalah/nota/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/itsmosalah/nota.svg?style=for-the-badge
+[forks-url]: https://github.com/itsmosalah/nota/network/members
+[stars-shield]: https://img.shields.io/github/stars/itsmosalah/nota.svg?style=for-the-badge
+[stars-url]: https://github.com/itsmosalah/nota/stargazers
+[issues-shield]: https://img.shields.io/github/issues/itsmosalah/nota.svg?style=for-the-badge
+[issues-url]: https://github.com/itsmosalah/nota/issues
+[license-shield]: https://img.shields.io/github/license/itsmosalah/nota.svg?style=for-the-badge
+[license-url]: https://github.com/itsmosalah/nota/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
+
