@@ -8,6 +8,10 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
+![createNote](https://github.com/itsmosalah/nota/assets/88220582/fcd8036e-adba-496f-bec3-af1b7dcd8995)
+![filteringByLabels](https://github.com/itsmosalah/nota/assets/88220582/3615a168-ffa3-4ed7-b390-7d5e10aa5537)
+![themeOptions](https://github.com/itsmosalah/nota/assets/88220582/66bf4d3c-5ec2-4298-9184-51618a6f8688)
+
 
 <!-- PROJECT LOGO -->
 <br />
