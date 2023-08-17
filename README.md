@@ -1,17 +1,6 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<!-- readme top tag -->
+
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-![createNote](https://github.com/itsmosalah/nota/assets/88220582/fcd8036e-adba-496f-bec3-af1b7dcd8995)
-![filteringByLabels](https://github.com/itsmosalah/nota/assets/88220582/3615a168-ffa3-4ed7-b390-7d5e10aa5537)
-![themeOptions](https://github.com/itsmosalah/nota/assets/88220582/66bf4d3c-5ec2-4298-9184-51618a6f8688)
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -26,28 +15,21 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+
 <!-- [![MIT License][license-shield]][license-url] -->
-
-
-
-
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
+      <a href="#demo">Demo</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -56,103 +38,86 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
+## Demo
 
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `itsmosalah`, `nota`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+<div name="demo" align="center">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<h3>Create notes with rich text editing tools!</h3>
 
+![createNote](https://github.com/itsmosalah/nota/assets/88220582/fcd8036e-adba-496f-bec3-af1b7dcd8995)
 
-### Built With
-
-* [![Flutter][Flutter]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+<br/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<h3>Create labels to organize your notes and filter them with ease!</h3>
 
+![filteringByLabels](https://github.com/itsmosalah/nota/assets/88220582/3615a168-ffa3-4ed7-b390-7d5e10aa5537)
+
+<br/>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<h3>Set your favorite theme and enable dark mode!</h3>
+
+![themeOptions](https://github.com/itsmosalah/nota/assets/88220582/66bf4d3c-5ec2-4298-9184-51618a6f8688)
+
+</div>
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is a simple mobile app fully made with Flutter. To run the project locally:
+
+-   Make sure to have the latest version of [Flutter](https://docs.flutter.dev/get-started/install) installed on your machine.
+-   Download the project files either by cloning or downloading the project as ZIP.
+-   Install the dependencies with `flutter pub get`.
+-   Make sure to have a physical Android device with USB drivers installed or an Android emulator to run this app on.
+    **Important note: This app has only been tested on Android 12.**
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+-   [Flutter](https://docs.flutter.dev/get-started/install)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/itsmosalah/nota.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+1. Clone the repo
+    ```sh
+    git clone https://github.com/itsmosalah/nota.git
+    ```
+2. Install dependencies using flutter pub
+    ```sh
+    flutter pub get
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+-   [x] Create Notes and save them in local database.
+-   [x] Create Labeling system with label filters.
+-   [x] Add themes options with dark mode.
+-   [ ] Add options to customize the notes order
+    -   [ ] Add sorting options
+    -   [ ] Add an option to pin notes
 
 See the [open issues](https://github.com/itsmosalah/nota/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -168,41 +133,19 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
+
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Mohamed Abdelrahman - mohamed.s.abdelrahman02@gmail.com -
 
 Project Link: [https://github.com/itsmosalah/nota](https://github.com/itsmosalah/nota)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/itsmosalah/nota.svg?style=for-the-badge
 [contributors-url]: https://github.com/itsmosalah/nota/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/itsmosalah/nota.svg?style=for-the-badge
@@ -216,4 +159,3 @@ Project Link: [https://github.com/itsmosalah/nota](https://github.com/itsmosalah
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
-
