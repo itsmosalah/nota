@@ -104,7 +104,7 @@ This is a simple mobile app fully made with Flutter. To run the project locally:
 
 <!-- PACKAGES USED -->
 
-## Packeges used
+## Packages used
 
 <div name="packages-used">
 
