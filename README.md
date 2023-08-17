@@ -38,6 +38,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#packages-used">Packages used</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -101,6 +102,21 @@ This is a simple mobile app fully made with Flutter. To run the project locally:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- PACKAGES USED -->
+
+## Packeges used
+
+<div name="packages-used">
+
+-   [flutter_bloc](https://pub.dev/packages/flutter_bloc) | for state management.
+-   [flutter_quill](https://pub.dev/packages/flutter_quill) | for rich text editing.
+-   [sqflite](https://pub.dev/packages/sqflite) | for local database.
+-   [path](https://pub.dev/packages/path) | for finding local database path.
+-   [flutter_colorpicker](https://pub.dev/packages/flutter_colorpicker) | for picking custom colors when creating labels.
+-   [theme_provider](https://pub.dev/packages/theme_provider) | for providing theme data across the app.
+
+</div>
+
 <!-- ROADMAP -->
 
 ## Roadmap
@@ -108,9 +124,11 @@ This is a simple mobile app fully made with Flutter. To run the project locally:
 -   [x] Create Notes and save them in local database.
 -   [x] Create Labeling system with label filters.
 -   [x] Add themes options with dark mode.
--   [ ] Add options to customize the notes order
-    -   [ ] Add sorting options
-    -   [ ] Add an option to pin notes
+-   [ ] Add options to customize the notes order.
+    -   [ ] Add sorting options.
+    -   [ ] Add an option to pin notes.
+-   [ ] Create unit and widget tests.
+-   [ ] Create a documentation for project design.
 
 See the [open issues](https://github.com/itsmosalah/nota/issues) for a full list of proposed features (and known issues).
 
